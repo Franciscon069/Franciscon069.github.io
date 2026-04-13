@@ -24,12 +24,10 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-const toggleLanguage = () => {
-  locale.value = locale.value === 'en' ? 'es' : 'en'
-  localStorage.setItem('locale', locale.value)
+const setLanguage = (lang) => {
+  locale.value = lang
+  localStorage.setItem('locale', lang)
 }
-
-const languageLabel = computed(() => locale.value === 'en' ? 'ES' : 'EN')
 </script>
 
 <template>
@@ -54,12 +52,19 @@ const languageLabel = computed(() => locale.value === 'en' ? 'ES' : 'EN')
         </a>
       </div>
 
-      <div class="hidden md:flex gap-4">
+      <div class="hidden md:flex gap-2 items-center">
         <button 
-          @click="toggleLanguage"
-          class="px-3 py-1 rounded border border-primary/30 text-primary font-bold text-sm hover:bg-primary/10 transition-all"
+          @click="setLanguage('en')"
+          :class="['px-2 py-1 text-sm font-bold transition-all border-b-2 flex items-baseline gap-1', locale === 'en' ? 'text-primary border-primary' : 'text-on-surface-variant border-transparent hover:text-primary/80']"
         >
-          {{ languageLabel }}
+          EN <span class="text-[0.65rem] font-medium opacity-70">US</span>
+        </button>
+        <span class="text-on-surface-variant/50 text-sm">|</span>
+        <button 
+          @click="setLanguage('es')"
+          :class="['px-2 py-1 text-sm font-bold transition-all border-b-2 flex items-baseline gap-1', locale === 'es' ? 'text-primary border-primary' : 'text-on-surface-variant border-transparent hover:text-primary/80']"
+        >
+          ES <span class="text-[0.65rem] font-medium opacity-70">Mx</span>
         </button>
       </div>
 
@@ -114,12 +119,19 @@ const languageLabel = computed(() => locale.value === 'en' ? 'ES' : 'EN')
             {{ link.label }}
           </a>
         </div>
-        <div class="flex gap-4 mt-4 pt-4 border-t border-outline-variant/10">
+        <div class="flex gap-2 items-center mt-4 pt-4 border-t border-outline-variant/10">
           <button 
-            @click="toggleLanguage"
-            class="px-3 py-1 rounded border border-primary/30 text-primary font-bold text-sm hover:bg-primary/10 transition-all"
+            @click="setLanguage('en')"
+            :class="['px-2 py-1 text-sm font-bold transition-all border-b-2 flex items-baseline gap-1', locale === 'en' ? 'text-primary border-primary' : 'text-on-surface-variant border-transparent hover:text-primary/80']"
           >
-            {{ languageLabel }}
+            EN <span class="text-[0.65rem] font-medium opacity-70">US</span>
+          </button>
+          <span class="text-on-surface-variant/50 text-sm">|</span>
+          <button 
+            @click="setLanguage('es')"
+            :class="['px-2 py-1 text-sm font-bold transition-all border-b-2 flex items-baseline gap-1', locale === 'es' ? 'text-primary border-primary' : 'text-on-surface-variant border-transparent hover:text-primary/80']"
+          >
+            ES <span class="text-[0.65rem] font-medium opacity-70">Mx</span>
           </button>
         </div>
       </div>
